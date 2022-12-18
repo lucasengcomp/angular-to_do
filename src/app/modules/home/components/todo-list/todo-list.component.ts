@@ -1,12 +1,12 @@
 import { TaskList } from './../../model/task-list';
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss']
 })
-export class TodoListComponent implements OnInit {
+export class TodoListComponent implements DoCheck {
 
   public taskList: Array<TaskList> = [
     { task: "Minha nova task", checked: true },
@@ -16,7 +16,8 @@ export class TodoListComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngDoCheck() {
+    this.taskList.sort((first, last) => Number(first.checked) - Number(last.checked));
   }
 
   public setEmitTaskList(event: string) {
