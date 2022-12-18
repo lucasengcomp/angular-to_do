@@ -11,6 +11,13 @@ import { HomeComponent } from './pages/home/home.component';
   imports: [
     CommonModule
   ],
-  declarations: [ComponentsComponent, HeaderComponent, TodoButtonDeleteAllComponent, TodoInputAddItensComponent, TodoListComponent, HomeComponent]
+  declarations: [
+    ComponentsComponent,
+    HeaderComponent,
+    TodoButtonDeleteAllComponent,
+    TodoInputAddItensComponent,
+    TodoListComponent,
+    HomeComponent,
+  ]
 })
 export class HomeModule { }
