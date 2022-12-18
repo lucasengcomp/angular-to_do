@@ -8,16 +8,13 @@ import { Component, DoCheck, OnInit } from '@angular/core';
 })
 export class TodoListComponent implements DoCheck {
 
-  public taskList: Array<TaskList> = [
-    { task: "Minha nova task", checked: true },
-    { task: "Minha nova task 2", checked: false },
-    { task: "Minha nova task 3", checked: true },
-  ];
+  public taskList: Array<TaskList> = JSON.parse(localStorage.getItem("list") || '[]')
 
   constructor() { }
 
   ngDoCheck() {
     this.taskList.sort((first, last) => Number(first.checked) - Number(last.checked));
+    localStorage.setItem("list", JSON.stringify(this.taskList));
   }
 
   public setEmitTaskList(event: string) {
@@ -29,7 +26,7 @@ export class TodoListComponent implements DoCheck {
   }
 
   public deleteAll() {
-    const confirm  = window.confirm("Deseja remover todas as tarefas?");
+    const confirm = window.confirm("Deseja remover todas as tarefas?");
 
     if (confirm == true) {
       this.taskList = [];
@@ -37,9 +34,9 @@ export class TodoListComponent implements DoCheck {
   }
 
   public validationInput(event: string, index: number) {
-    if(!event.length) {
+    if (!event.length) {
       const confirm = window.confirm("Task está vazia, deseja deletar?");
-      if(confirm) {
+      if (confirm) {
         this.deleteItemTaskList(index);
       }
     }
